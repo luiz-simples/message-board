@@ -10,6 +10,7 @@ CONTAINER_HOME_FOLDER=/mBoard
 DATABASE_USER=mBoard
 DATABASE_PASS=mBoardPass
 DATABASE_HOST=mBoardDB
+DATABASE_NAME=$(DATABASE_USER)
 DATABASE_IMAGE_DATA=/var/pg/$(IMAGE_NAME_DATABASE)
 DATABASE_CONTAINER_DATA=$(PWD)/../db/$(CONTAINER_NAME_DATABASE)
 
@@ -20,6 +21,11 @@ build-image-database:
 
 drop-container-database:
 	( ( docker stop ${CONTAINER_NAME_DATABASE} && docker rm ${CONTAINER_NAME_DATABASE} ) || echo "Container not found: ${CONTAINER_NAME_DATABASE}" )
+
+attach-database:
+	( ( docker stop ${CONTAINER_NAME_DATABASE} ) || (echo "Container not found: ${CONTAINER_NAME_DATABASE}" && exit 0) ) && \
+	docker start ${CONTAINER_NAME_DATABASE} && \
+	docker exec -it ${CONTAINER_NAME_DATABASE} psql -h localhost -U ${DATABASE_USER} ${DATABASE_NAME}
 
 build-container-database: drop-container-database build-image-database
 	mkdir -p $(DATABASE_CONTAINER_DATA) && \
