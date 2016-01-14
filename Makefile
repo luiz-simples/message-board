@@ -111,4 +111,7 @@ build-production-version:
 	cd spa/ && gulp build && cd ../ && rsync -avzh --delete ./spa/dist/ ./api/public/
 
 deploy-production: build-production-version
-	rsync -avzh --exclude-from "${PWD}/.deployignore" --delete ./ ${SERVER_SSH}:${SERVER_FOLDER_SRC} && ssh ${SERVER_SSH} "cd ${SERVER_FOLDER_SRC} && make build-container-production"
+	rm -Rf log/ && \
+	rm -Rf node_modules/ && \
+	rsync -avzh --exclude-from "${PWD}/.deployignore" --delete ./ ${SERVER_SSH}:${SERVER_FOLDER_SRC} && \
+	ssh ${SERVER_SSH} "cd ${SERVER_FOLDER_SRC} && make build-container-production"
