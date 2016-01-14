@@ -3,12 +3,17 @@ Project Sample with Express, Socket, Angular, Docker
 
 [![Codeship Status for boennemann/badges](https://www.codeship.io/projects/83fd1930-9ce8-0133-2987-22509ada1533/status?branch=master)](https://www.codeship.io/projects/127290)
 
+
+[Demo Version](http://188.226.170.38:2018/)
+
+
 Environment with:
 
 * [Docker](https://docs.docker.com/)
 * [Make](http://www.gnu.org/software/make/manual/make.html#Running)
 * [NodeJS](https://nodejs.org/dist/latest-v4.x/docs/api/)
 * [PostgreSQL](http://www.postgresql.org/docs/9.4/static/)
+* [Demo Version](http://188.226.170.38:2018/)
 
 
 First tasks of environment
