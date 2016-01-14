@@ -23,6 +23,12 @@ Second tasks of environment: only when development builded
 * Enter command line of database (PSQL) - ```$ make attach-database```
 
 
+Deploy tasks of project:
+
+* Build production version - ```$ make build-production-version```
+* Deploy version [http://188.226.170.38:2018/](http://188.226.170.38:2018/) (only public-key registered)- ```$ make deploy-production```
+
+
 Projects
 
 * [SPA Project](https://github.com/luiz-simples/message-board/tree/master/spa)
