@@ -92,3 +92,11 @@ build-container-production: drop-container-production build-container-database b
 		--name ${CONTAINER_NAME_PRODUCTION} \
 		${IMAGE_NAME_PRODUCTION} \
     node ${CONTAINER_HOME_FOLDER}/sys/server.js
+
+install-dependencies:
+	npm install -g gulp bower
+	npm install
+	bower install --config.interactive=false
+
+run-tests:
+	gulp test && gulp protractor

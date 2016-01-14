@@ -37,3 +37,6 @@ dump.rdb
 nbproject
 .idea
 .node_history
+.sass-cache
+dist
+own-sample
