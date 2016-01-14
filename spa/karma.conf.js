@@ -30,6 +30,7 @@ function listFiles() {
       pattern: pattern
     };
   });
+
   files.push({
     pattern: path.join(conf.paths.src, '/assets/**/*'),
     included: false,
@@ -67,17 +68,15 @@ module.exports = function(config) {
       'karma-angular-filesort',
       'karma-coverage',
       'karma-jasmine',
-      'karma-ng-html2js-preprocessor',
-      'karma-coveralls'
+      'karma-ng-html2js-preprocessor'
     ],
 
-    reporters: ['progress', 'coverage', 'coveralls'],
+    reporters: ['progress', 'coverage'],
 
     coverageReporter: {
       type : 'lcov',
       dir : 'coverage/'
     },
-
 
     proxies: {
       '/assets/': path.join('/base/', conf.paths.src, '/assets/')
