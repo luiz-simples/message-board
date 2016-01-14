@@ -1,0 +1,10 @@
+.git
+.node-version
+.nvmrc
+.gitignore
+.eslintrc
+.deployignore
+README.md
+LICENSE
+own-sample/
+spa/

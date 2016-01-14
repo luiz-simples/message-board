@@ -14,10 +14,13 @@ DATABASE_NAME=$(DATABASE_USER)
 DATABASE_IMAGE_DATA=/var/pg/$(IMAGE_NAME_DATABASE)
 DATABASE_CONTAINER_DATA=$(PWD)/../db/$(CONTAINER_NAME_DATABASE)
 
+SERVER_SSH=root@188.226.170.38
+SERVER_FOLDER_SRC=/usr/src/message-board
+
 
 ### - Database Tasks - ###
 build-image-database:
-	docker build -t $(IMAGE_NAME_DATABASE) -f ./docker/database .
+	docker build --rm -t $(IMAGE_NAME_DATABASE) -f ./docker/database .
 
 drop-container-database:
 	( ( docker stop ${CONTAINER_NAME_DATABASE} && docker rm ${CONTAINER_NAME_DATABASE} ) || echo "Container not found: ${CONTAINER_NAME_DATABASE}" )
@@ -43,7 +46,7 @@ build-container-database: drop-container-database build-image-database
 
 ### - Development Tasks - ###
 build-image-development:
-	docker build -t $(IMAGE_NAME_DEVELOPMENT) -f ./docker/development .
+	docker build --rm -t $(IMAGE_NAME_DEVELOPMENT) -f ./docker/development .
 
 drop-container-development:
 	( ( docker stop ${CONTAINER_NAME_DEVELOPMENT} && docker rm ${CONTAINER_NAME_DEVELOPMENT} ) || echo "Container not found: ${CONTAINER_NAME_DEVELOPMENT}" )
@@ -74,14 +77,14 @@ build-container-development: drop-container-development build-container-database
 
 ### - Production Tasks - ###
 build-image-production:
-	docker build -t $(IMAGE_NAME_PRODUCTION) -f ./docker/production .
+	docker build --rm -t $(IMAGE_NAME_PRODUCTION) -f ./docker/production .
 
 drop-container-production:
 	( ( docker stop ${CONTAINER_NAME_PRODUCTION} && docker rm ${CONTAINER_NAME_PRODUCTION} ) || echo "Container not found: ${CONTAINER_NAME_PRODUCTION}" )
 
 build-container-production: drop-container-production build-container-database build-image-production
 	docker run \
-		-v ${PWD}:${CONTAINER_HOME_FOLDER}/sys:ro \
+		-v ${PWD}/api:${CONTAINER_HOME_FOLDER}/sys:ro \
 		-p 2018:2018 \
 		-p 2019:2019 \
 		-w ${CONTAINER_HOME_FOLDER}/sys \
@@ -91,11 +94,21 @@ build-container-production: drop-container-production build-container-database b
 		-d \
 		--name ${CONTAINER_NAME_PRODUCTION} \
 		${IMAGE_NAME_PRODUCTION} \
-    node ${CONTAINER_HOME_FOLDER}/sys/server.js
+    node server.js
 
-install-dependencies:
+
+### - Continuos Integration Tasks - ###
+install-global-dependencies:
 	npm install -g gulp bower
-	cd spa/ && npm install && bower install --config.interactive=false && cd ../
+
+install-own-dependencies:
+	cd spa/ && npm install && bower install --config.interactive=false && cd ../api/ && npm install && cd ../
 
 run-tests:
 	cd spa/ && gulp test && gulp protractor && cd ../
+
+build-production-version:
+	cd spa/ && gulp build && cd ../ && rsync -avzh --delete ./spa/dist/ ./api/public/
+
+deploy-production: build-production-version
+	rsync -avzh --exclude-from "${PWD}/.deployignore" --delete ./ ${SERVER_SSH}:${SERVER_FOLDER_SRC} && ssh ${SERVER_SSH} "cd ${SERVER_FOLDER_SRC} && make build-container-production"

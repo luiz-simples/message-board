@@ -1,0 +1,20 @@
+{
+  "name": "message-board-api",
+  "version": "1.0.0",
+  "description": "Project Sample with Express, Socket",
+  "author": "Luiz Amorim <luiz.simples@gmail.com>",
+  "license": "UNLICENSED",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+
+  "dependencies": {
+    "express": "^4.13.3"
+  },
+
+  "engines": {
+    "node": "^4.2.4"
+  }
+}

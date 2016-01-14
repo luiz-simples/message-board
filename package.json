@@ -2,7 +2,9 @@
   "name": "message-board",
   "version": "1.0.0",
   "description": "Project Sample with Express, Socket, Angular, Docker",
-  "main": "server.js",
+  "author": "Luiz Amorim <luiz.simples@gmail.com>",
+  "license": "UNLICENSED",
+
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -20,19 +22,12 @@
     "Docker"
   ],
 
-  "author": "Luiz Amorim <luiz.simples@gmail.com>",
-
-  "license": "UNLICENSED",
 
   "bugs": {
     "url": "https://github.com/luiz-simples/message-board/issues"
   },
 
   "homepage": "https://github.com/luiz-simples/message-board#readme",
-
-  "dependencies": {
-    "express": "^4.13.3"
-  },
 
   "engines": {
     "node": "^4.2.4"

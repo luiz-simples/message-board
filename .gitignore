@@ -38,5 +38,10 @@ nbproject
 .idea
 .node_history
 .sass-cache
-dist
 own-sample
+
+api/public/**/*.*
+!api/public/.gitkeep
+
+spa/dist/**/*.*
+!spa/dist/.gitkeep

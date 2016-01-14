@@ -1,13 +1,14 @@
 'use strict';
 
 var portHttp = 2018;
-var machineIPs = require('./machine.ips');
 var express = require('express');
+var machineIPs = require('./machine.ips');
+
+var pathStaticHome = __dirname.concat('/public');
+
 var app = express();
 
-app.get('/', function(req, res) {
-  res.send('hello world');
-});
+app.use('/', express.static(pathStaticHome));
 
 app.listen(portHttp, function() {
   var separatorIP = '\r\n';
