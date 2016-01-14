@@ -95,8 +95,7 @@ build-container-production: drop-container-production build-container-database b
 
 install-dependencies:
 	npm install -g gulp bower
-	npm install
-	bower install --config.interactive=false
+	cd spa/ && npm install && bower install --config.interactive=false && cd ../
 
 run-tests:
-	gulp test && gulp protractor
+	cd spa/ && gulp test && gulp protractor && cd ../
