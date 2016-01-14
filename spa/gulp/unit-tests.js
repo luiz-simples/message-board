@@ -40,14 +40,16 @@ function runTests (singleRun, done) {
   var server = new karma.Server(localConfig, function(failCount) {
     var err = failCount ? new Error("Failed " + failCount + " tests.") : null;
     done(err);
-    process.exit();
   })
 
   server.start();
 }
 
 gulp.task('test', ['scripts'], function(done) {
-  runTests(true, done);
+  runTests(true, function(err) {
+    if (err) done(err);
+    process.exit()
+  });
 });
 
 gulp.task('test:auto', ['watch'], function(done) {

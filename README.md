@@ -2,6 +2,8 @@
 Project Sample with Express, Socket, Angular, Docker
 
 [![Codeship Status for boennemann/badges](https://www.codeship.io/projects/83fd1930-9ce8-0133-2987-22509ada1533/status?branch=master)](https://www.codeship.io/projects/127290)
+[![Code Climate](https://codeclimate.com/github/luiz-simples/message-board/badges/gpa.svg)](https://codeclimate.com/github/luiz-simples/message-board)
+[![Issue Count](https://codeclimate.com/github/luiz-simples/message-board/badges/issue_count.svg)](https://codeclimate.com/github/luiz-simples/message-board)
 
 
 [Demo Version](http://188.226.170.38:2018/)
