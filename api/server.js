@@ -1,17 +1,22 @@
 'use strict';
 
 var portHttp = 2018;
+var log = require('log-util');
+var http = require('http');
 var express = require('express');
+var socketIO = require('socket.io');
 var machineIPs = require('./machine.ips');
+
+var app = express();
+var serverHttp = http.Server(app);
+var serverSocket = socketIO(serverHttp);
 
 var pathStaticHome = __dirname.concat('/public');
 
-var app = express();
-
 app.use('/', express.static(pathStaticHome));
 
-app.listen(portHttp, function() {
+serverHttp.listen(portHttp, function(){
   var separatorIP = '\r\n';
   var ips = machineIPs(portHttp, separatorIP);
-  console.log('Server RUN in:\r\n', ips);
+  log.info('Server RUN in ', ips);
 });
