@@ -4,6 +4,6 @@
 
   angular
     .module('spa')
-    .constant('moment', moment)
-    .constant('$', $);
+    .constant('$', $)
+    .constant('moment', moment);
 })();
