@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN echo "America/Sao_Paulo" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
 
 ### Update debian:jessie & Install dev tools
-RUN apt-get update && apt-get upgrade -qqy --force-yes && apt-get install -qqy --force-yes apt-utils locales vim curl
+RUN apt-get update && apt-get upgrade -qqy --force-yes && apt-get install -qqy --force-yes apt-utils locales vim curl gzip
 
 ### Set UTF-8 with pt_BR
 RUN echo "LANGUAGE=pt_BR.UTF-8" >> /etc/environment && echo "LANG=pt_BR.UTF-8" >> /etc/environment && echo "LC_ALL=pt_BR.UTF-8" >> /etc/environment && locale-gen pt_BR.UTF-8 && dpkg-reconfigure locales

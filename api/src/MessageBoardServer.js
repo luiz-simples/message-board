@@ -4,6 +4,7 @@ var path = require('path');
 var http = require('http');
 var express = require('express');
 var socketIO = require('socket.io');
+var compression = require('compression');
 var machineIPs = require('./lib/machine.ips');
 var publicPath = path.dirname(__dirname).concat('/public');
 
@@ -11,6 +12,7 @@ function MessageBoardServer() {
   var server = this;
 
   server.appExpress = express();
+  server.appExpress.use(compression());
   server.appExpress.use('/', express.static(publicPath));
 
   server.appHttp = http.Server(server.appExpress);

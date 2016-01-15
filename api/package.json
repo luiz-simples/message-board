@@ -5,24 +5,22 @@
   "author": "Luiz Amorim <luiz.simples@gmail.com>",
   "license": "UNLICENSED",
   "main": "server.js",
-
   "scripts": {
     "test": "jest",
     "start": "node server.js"
   },
-
   "dependencies": {
+    "compression": "^1.6.0",
     "express": "^4.13.3",
+    "gzip": "^0.1.0",
     "lodash": "^4.0.0",
     "log-util": "^1.1.1",
     "q": "^1.4.1",
     "socket.io": "^1.4.4"
   },
-
   "devDependencies": {
     "jest-cli": "^0.8.2"
   },
-
   "jest": {
     "testDirectoryName": "tests/src",
     "unmockedModulePathPatterns": [
@@ -31,7 +29,6 @@
       "./node_modules/lodash"
     ]
   },
-
   "engines": {
     "node": "^4.2.4"
   }
