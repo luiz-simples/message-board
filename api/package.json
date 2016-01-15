@@ -5,15 +5,33 @@
   "author": "Luiz Amorim <luiz.simples@gmail.com>",
   "license": "UNLICENSED",
   "main": "server.js",
+
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node server.js"
   },
+
   "dependencies": {
     "express": "^4.13.3",
+    "lodash": "^4.0.0",
     "log-util": "^1.1.1",
+    "q": "^1.4.1",
     "socket.io": "^1.4.4"
   },
+
+  "devDependencies": {
+    "jest-cli": "^0.8.2"
+  },
+
+  "jest": {
+    "testDirectoryName": "tests/src",
+    "unmockedModulePathPatterns": [
+      "./tests/support",
+      "./node_modules/q",
+      "./node_modules/lodash"
+    ]
+  },
+
   "engines": {
     "node": "^4.2.4"
   }
