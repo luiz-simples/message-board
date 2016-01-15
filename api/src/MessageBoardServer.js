@@ -2,6 +2,7 @@
 
 var path = require('path');
 var http = require('http');
+var helmet = require('helmet');
 var express = require('express');
 var socketIO = require('socket.io');
 var compression = require('compression');
@@ -12,6 +13,7 @@ function MessageBoardServer() {
   var server = this;
 
   server.appExpress = express();
+  server.appExpress.use(helmet())
   server.appExpress.use(compression());
   server.appExpress.use('/', express.static(publicPath));
 
