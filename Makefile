@@ -65,7 +65,6 @@ build-container-development: drop-container-development build-container-database
 		-v ${PWD}:/${CONTAINER_HOME_FOLDER}/volume \
 		-p 3000:3000 \
 		-p 2018:2018 \
-		-p 2019:2019 \
 		-w /${CONTAINER_HOME_FOLDER}/volume \
 		-h dev \
 		--link $(CONTAINER_NAME_DATABASE):$(DATABASE_HOST) \
@@ -86,26 +85,26 @@ build-container-production: drop-container-production build-container-database b
 	docker run \
 		-v ${PWD}/api:${CONTAINER_HOME_FOLDER}/sys:ro \
 		-p 2018:2018 \
-		-p 2019:2019 \
 		-w ${CONTAINER_HOME_FOLDER}/sys \
 		-h prod \
 		--link $(CONTAINER_NAME_DATABASE):$(DATABASE_HOST) \
 		--dns=8.8.8.8 \
 		-d \
 		--name ${CONTAINER_NAME_PRODUCTION} \
+		--privileged=true \
 		${IMAGE_NAME_PRODUCTION} \
     node server.js
 
 
 ### - Continuos Integration Tasks - ###
 install-global-dependencies:
-	npm install -g gulp bower jest mocha coveralls lcov-result-merger
+	npm install -g gulp bower jest mocha coveralls lcov-result-merger jest-cli
 
 install-own-dependencies:
 	cd spa/ && npm install && bower install --config.interactive=false && cd ../api/ && npm install && cd ../
 
 run-tests:
-	cd spa/ && gulp test && gulp protractor && cd ../api && jest tests/ && cd ../
+	cd spa/ && gulp test && gulp protractor && cd ../api && npm test && cd ../
 
 build-production-version:
 	cd spa/ && gulp build && cd ../ && rsync -avzh --delete ./spa/dist/ ./api/public/
