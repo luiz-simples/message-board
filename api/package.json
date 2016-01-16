@@ -25,6 +25,7 @@
   },
 
   "jest": {
+    "collectCoverage": true,
     "testDirectoryName": "tests/src",
     "setupEnvScriptFile": "tests/support/paths.js",
     "unmockedModulePathPatterns": [
