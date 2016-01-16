@@ -75,7 +75,7 @@ module.exports = function(config) {
 
     coverageReporter: {
       type : 'lcov',
-      dir : 'coverage/'
+      dir : '../api/coverage/'
     },
 
     proxies: {
