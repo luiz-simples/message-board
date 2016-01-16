@@ -111,6 +111,7 @@ build-production-version:
 
 deploy-production: build-production-version
 	rm -Rf log/ && \
+	rm -Rf .tmp/ && \
 	rm -Rf node_modules/ && \
 	cd api/ && rm -Rf node_modules/ && npm install --production && cd ../ && \
 	rsync -avzh --exclude-from "${PWD}/.deployignore" --delete ./ ${SERVER_SSH}:${SERVER_FOLDER_SRC} && \

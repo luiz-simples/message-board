@@ -30,6 +30,7 @@
   "homepage": "https://github.com/luiz-simples/message-board#readme",
 
   "engines": {
-    "node": "^4.2.4"
+    "node": "^4.2.4",
+    "npm": "^3.5.3"
   }
 }
