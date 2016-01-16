@@ -6,6 +6,7 @@ var express = require('express');
 var socketIO = require('socket.io');
 var compression = require('compression');
 var machineIPs = require('./lib/machine.ips');
+var MessageBoardActions = require('./MessageBoardActions');
 var publicPath = path.dirname(__dirname).concat('/public');
 
 function MessageBoardServer(http) {
@@ -18,9 +19,11 @@ function MessageBoardServer(http) {
 
   server.appHttp = http.Server(server.appExpress);
   server.appSocket = socketIO(server.appHttp);
+  server.appActions = new MessageBoardActions(server);
 
   server.run = function(port, cb) {
     server.ips = machineIPs(port);
+    server.appActions.registerActions();
     server.appHttp.listen(port, cb);
   };
 }

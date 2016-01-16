@@ -1,7 +1,8 @@
 'use strict';
 
 var socketIoMock = jest.genMockFunction().mockImplementation(function() {
-  socketIoMock.__returnMock__ = { funcSocketIO: true };
+  socketIoMock.__returnMock__ = { of: jest.genMockFunction() };
+
   return socketIoMock.__returnMock__;
 });
 

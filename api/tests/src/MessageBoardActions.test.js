@@ -53,9 +53,9 @@ describe('MessageBoardActions', function() {
     });
 
     it('#registerActions: should return object with all actions', function() {
-      var actionsLoaded = mbActions.registerActions();
+      mbActions.registerActions();
 
-      expect(actionsLoaded).toEqual({
+      expect(mbActions.allActions).toEqual({
         'action:default': actionMock.__returnMock__
       });
     });
