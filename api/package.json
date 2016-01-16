@@ -26,6 +26,7 @@
     "collectCoverage": true,
     "collectCoverageOnlyFrom": {
       "src/lib/machine.ips.js": true,
+      "src/MessageBoardActions.js": true,
       "src/MessageBoardServer.js": true
     },
     "testDirectoryName": "tests/src",

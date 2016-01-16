@@ -8,7 +8,6 @@ var browserSync = require('browser-sync');
 
 var $ = require('gulp-load-plugins')();
 
-
 gulp.task('scripts-reload', function() {
   return buildScripts()
     .pipe(browserSync.stream());
@@ -23,4 +22,4 @@ function buildScripts() {
     .pipe($.eslint())
     .pipe($.eslint.format())
     .pipe($.size())
-};
+}

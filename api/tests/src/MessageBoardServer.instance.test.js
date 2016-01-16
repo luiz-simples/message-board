@@ -49,7 +49,7 @@ describe('MessageBoardServer', function() {
     });
 
     it('should use express.static to public folder', function() {
-      var pathPublic = '/public'.pathRoot();
+      var pathPublic = 'public'.pathRoot();
       expect(expressMock.static.mock.calls).toEqual([[pathPublic]]);
     });
 

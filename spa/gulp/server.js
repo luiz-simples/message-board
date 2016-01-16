@@ -9,10 +9,8 @@ var browserSyncSpa = require('browser-sync-spa');
 
 var util = require('util');
 
-var proxyMiddleware = require('http-proxy-middleware');
-
-function browserSyncInit(baseDir, browser) {
-  browser = browser === undefined ? 'default' : browser;
+function browserSyncInit(baseDir, brwsr) {
+  var browser = !brwsr ? 'default' : brwsr;
 
   var routes = null;
   if(baseDir === conf.paths.src || (util.isArray(baseDir) && baseDir.indexOf(conf.paths.src) !== -1)) {
