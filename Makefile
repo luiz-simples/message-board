@@ -99,7 +99,7 @@ build-container-production: drop-container-production build-container-database b
 
 ### - Continuos Integration Tasks - ###
 install-global-dependencies:
-	npm install -g gulp bower jest mocha
+	npm install -g gulp bower jest mocha coveralls lcov-result-merger
 
 install-own-dependencies:
 	cd spa/ && npm install && bower install --config.interactive=false && cd ../api/ && npm install && cd ../

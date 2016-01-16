@@ -10,3 +10,5 @@ own-sample/
 spa/
 tmp/
 tests/
+lcov.info
+mlcov.info

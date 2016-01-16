@@ -56,7 +56,7 @@ ENV NODE_ENV development
 RUN npm update -g
 RUN npm install -g gulp bower yo
 RUN npm install -g generator-gulp-angular
-RUN npm install -g jest mocha
+RUN npm install -g jest mocha coveralls lcov-result-merger
 
 ### Add user in debian:jessie, Username: "mBoard" & folderHome: /mBoard
 RUN echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
