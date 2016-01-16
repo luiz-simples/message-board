@@ -19,7 +19,7 @@ RUN echo "" >> /etc/bash.bashrc
 RUN echo "America/Sao_Paulo" > /etc/timezone && dpkg-reconfigure -f noninteractive tzdata
 
 ### Update debian:jessie & Install dev tools
-RUN apt-get update && apt-get upgrade -qqy --force-yes && apt-get install -qqy --force-yes apt-utils htop locales sudo libfontconfig1 bzip2 tar build-essential python-software-properties vim git curl
+RUN apt-get update && apt-get upgrade -qqy --force-yes && apt-get install -qqy --force-yes apt-utils htop locales sudo libfontconfig1 bzip2 tar build-essential python-software-properties vim git curl gzip
 
 ### Set UTF-8 with pt_BR
 RUN echo "LANGUAGE=pt_BR.UTF-8" >> /etc/environment && echo "LANG=pt_BR.UTF-8" >> /etc/environment && echo "LC_ALL=pt_BR.UTF-8" >> /etc/environment && locale-gen pt_BR.UTF-8 && dpkg-reconfigure locales
@@ -56,6 +56,7 @@ ENV NODE_ENV development
 RUN npm update -g
 RUN npm install -g gulp bower yo
 RUN npm install -g generator-gulp-angular
+RUN npm install -g jest mocha
 
 ### Add user in debian:jessie, Username: "mBoard" & folderHome: /mBoard
 RUN echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \

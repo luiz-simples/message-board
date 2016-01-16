@@ -1,7 +1,6 @@
 'use strict';
 
 var path = require('path');
-var http = require('http');
 var helmet = require('helmet');
 var express = require('express');
 var socketIO = require('socket.io');
@@ -9,7 +8,7 @@ var compression = require('compression');
 var machineIPs = require('./lib/machine.ips');
 var publicPath = path.dirname(__dirname).concat('/public');
 
-function MessageBoardServer() {
+function MessageBoardServer(http) {
   var server = this;
 
   server.appExpress = express();

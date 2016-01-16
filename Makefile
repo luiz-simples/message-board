@@ -99,13 +99,13 @@ build-container-production: drop-container-production build-container-database b
 
 ### - Continuos Integration Tasks - ###
 install-global-dependencies:
-	npm install -g gulp bower
+	npm install -g gulp bower jest mocha
 
 install-own-dependencies:
 	cd spa/ && npm install && bower install --config.interactive=false && cd ../api/ && npm install && cd ../
 
 run-tests:
-	cd spa/ && gulp test && gulp protractor && cd ../
+	cd spa/ && gulp test && gulp protractor && cd ../api && jest tests/ && cd ../
 
 build-production-version:
 	cd spa/ && gulp build && cd ../ && rsync -avzh --delete ./spa/dist/ ./api/public/
