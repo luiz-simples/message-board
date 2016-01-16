@@ -19,7 +19,7 @@ describe('MessageBoardServer', function() {
 
       httpMock = {
         Server: jest.genMockFunction().mockImplementation(function() {
-          httpMock.Server.__returnMock__ = { httpServer: true };
+          httpMock.Server.__returnMock__ = { listen: jest.genMockFunction() };
           return httpMock.Server.__returnMock__;
         })
       };
@@ -71,6 +71,13 @@ describe('MessageBoardServer', function() {
 
     it('should register socket in instance', function() {
       expect(mbServer.appSocket).toEqual(socketIoMock.__returnMock__);
+    });
+
+    it('should listen port passed when call run', function() {
+      var port = 2018;
+      var callbackListen = { callbackListen: true };
+      mbServer.run(port, callbackListen);
+      expect(httpMock.Server.__returnMock__.listen.mock.calls).toEqual([[port, callbackListen]]);
     });
   });
 });

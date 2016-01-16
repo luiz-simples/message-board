@@ -12,9 +12,26 @@ function MessageBoardActions(mbServer) {
 
   mbActions.loadListActions = function() {
     return mbActions.findListActions().map(function(actionFile) {
-      var Action = require(actionFile);
-      return new Action(mbServer);
+      var action = require(actionFile)(mbServer);
+      action.actionFile = actionFile;
+      return action;
     });
+  };
+
+  mbActions.registerActions = function() {
+    var allActions = {};
+
+    mbActions.loadListActions().forEach(function(action) {
+      var withoutActionName = Boolean(!action || !action.hasOwnProperty('actionName') || !action.actionName);
+      if (withoutActionName) throw new Error('Without ActionName in '.concat(action.actionFile));
+
+      var duplicatedAction = allActions.hasOwnProperty(action.actionName);
+      if (duplicatedAction) throw new Error('Duplicated Action in '.concat(action.actionFile, ' and ', allActions[action.actionName].actionFile));
+
+      allActions[action.actionName] = action;
+    });
+
+    return allActions;
   };
 }
 
