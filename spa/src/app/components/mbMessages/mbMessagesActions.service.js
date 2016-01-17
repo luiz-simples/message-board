@@ -8,19 +8,18 @@
   /** @ngInject */
   function mbMessagesActions(mbActions) {
     var service = this;
-    var actionBase = 'action:board:';
-    var actionNameMessage = 'message';
-    var onAction = actionBase.concat('on:');
-    var sendAction = actionBase.concat('send:');
+    var sendMessage = 'send:message';
+    var receiveMessage = 'receive:message';
 
     service.onMessage = function(onMessage) {
-      var actionMessage = onAction.concat(actionNameMessage);
-      return mbActions.onAction(actionMessage, onMessage)
+      return mbActions.onAction(receiveMessage, onMessage)
     };
 
     service.sendMessage = function(message) {
-      var actionMessage = sendAction.concat(actionNameMessage);
-      return mbActions.sendAction({ actionName: actionMessage, message: message });
+      return mbActions.sendAction({
+        actionName: sendMessage,
+        message: message
+      });
     };
   }
 })();

@@ -5,10 +5,6 @@ var expressMock = require('express');
 var socketIoMock = require('socket.io');
 var compressionMock = require('compression');
 
-var pathMessageBoardActions = 'MessageBoardActions'.pathSrc();
-var pathMessageBoardActionsMock = 'MessageBoardActions'.pathMock();
-jest.setMock(pathMessageBoardActions, require.requireActual(pathMessageBoardActionsMock));
-
 var MessageBoardServer = 'MessageBoardServer'.requireSrc();
 
 describe('MessageBoardServer', function() {

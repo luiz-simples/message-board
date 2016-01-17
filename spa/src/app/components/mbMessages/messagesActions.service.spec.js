@@ -27,7 +27,7 @@
     });
 
     it('should register listen message', function() {
-      var actionName = 'action:board:on:message';
+      var actionName = 'action:on:message';
       var callbackOnMessage = jasmine.createSpy('callbackOnMessage');
 
       mbMessagesActions.onMessage(callbackOnMessage);
@@ -35,7 +35,7 @@
     });
 
     it('should send message action', function() {
-      var actionName = 'action:board:send:message';
+      var actionName = 'action:send:message';
       var messageObj = {};
 
       mbMessagesActions.sendMessage(messageObj);

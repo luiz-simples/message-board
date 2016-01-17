@@ -52,16 +52,16 @@ describe('MessageBoardActions', function() {
       expect(actionsLoaded).toEqual([actionMock.__returnMock__]);
     });
 
-    it('#registerActions: should return object with all actions', function() {
-      mbActions.registerActions();
+    it('#requireListActions: should return object with all actions', function() {
+      var allActions = mbActions.requireListActions();
 
-      expect(mbActions.allActions).toEqual({
+      expect(allActions).toEqual({
         'action:default': actionMock.__returnMock__
       });
     });
   });
 
-  describe('method #registerActions', function() {
+  describe('method #requireListActions', function() {
     it('should throw error when action name not filled', function() {
       listActionsPrepared = [
         pathActionDefault,
@@ -70,10 +70,10 @@ describe('MessageBoardActions', function() {
 
       prepareGlobSyncMock(listActionsPrepared);
 
-      expect(function() { mbActions.registerActions(); }).toThrow('Without ActionName in '.concat(pathActionWithoutName));
+      expect(function() { mbActions.requireListActions(); }).toThrow('Without ActionName in '.concat(pathActionWithoutName));
     });
 
-    it('should throw error when action name is duplicated', function() {
+    it('should when action name is duplicated', function() {
       listActionsPrepared = [
         pathActionDefault,
         pathActionDuplicatedName
@@ -81,7 +81,7 @@ describe('MessageBoardActions', function() {
 
       prepareGlobSyncMock(listActionsPrepared);
 
-      expect(function() { mbActions.registerActions(); }).toThrow('Duplicated Action in '.concat(pathActionDuplicatedName, ' and ', pathActionDefault));
+      expect(function() { mbActions.requireListActions(); }).toThrow('Duplicated Action in '.concat(pathActionDuplicatedName, ' and ', pathActionDefault));
     });
   });
 });

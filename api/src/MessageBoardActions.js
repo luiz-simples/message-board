@@ -3,7 +3,7 @@
 var glob = require('glob');
 var patternPathActions = __dirname.concat('/**/actions/*.js');
 
-function MessageBoardActions(mbServer) {
+function MessageBoardActions() {
   var mbActions = this;
   mbActions.allActions = {};
 
@@ -11,18 +11,18 @@ function MessageBoardActions(mbServer) {
     return glob.sync(patternPathActions) || [];
   };
 
-  mbActions.loadListActions = function() {
-    return mbActions.findListActions().map(function(actionFile) {
-      var action = require(actionFile)(mbServer);
-      action.actionFile = actionFile;
-      return action;
+  mbActions.requireListActions = function(actionsFiles) {
+    return actionsFiles.map(function(actionFile) {
+      var ActionClass = require(actionFile);
+      ActionClass.actionFile = actionFile;
+      return ActionClass;
     });
   };
 
-  mbActions.requireListActions = function() {
+  mbActions.unifyActions = function(listActions) {
     var actionsObject = {};
 
-    mbActions.loadListActions().forEach(function(action) {
+    listActions.forEach(function(action) {
       var withoutActionName = Boolean(!action || !action.hasOwnProperty('actionName') || !action.actionName);
       if (withoutActionName) throw new Error('Without ActionName in '.concat(action.actionFile));
 
@@ -35,23 +35,16 @@ function MessageBoardActions(mbServer) {
     return actionsObject;
   };
 
-  // mbActions.onAction = function() {
-  //
-  // };
-  //
-  // mbActions.onDisconnection = function () {
-  //
-  // };
-  //
-  // mbActions.onConnection = function (ioClient) {
-  //   ioClient.on('disconnect', mbActions.onDisconnection);
-  //   ioClient.on('message-board-actions', mbActions.onAction);
-  // };
+  mbActions.getActionsInstance = function(mbServer) {
+    var actionsFiles = mbActions.findListActions();
 
-  mbActions.registerActions = function() {
-    mbActions.allActions = mbActions.requireListActions();
-    // mbServer.ioActions = mbServer.appSocket.of('/actions');
-    // mbServer.ioActions.on('connection', mbActions.onConnection);
+    var listActions = mbActions.requireListActions(actionsFiles).map(function(ActionClass) {
+      return new ActionClass(mbServer);
+    });
+
+    var actionsInstance = mbActions.unifyActions(listActions);
+
+    return actionsInstance;
   };
 }
 
