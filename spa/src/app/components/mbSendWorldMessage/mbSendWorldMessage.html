@@ -1,0 +1,15 @@
+<form ng-show="vm.isLogged" ng-submit="vm.sendMessageToWorld()">
+  <img class="img-responsive img-circle img-sm" src="assets/images/user1-128x128.jpg" alt="Alt Text" />
+
+  <div class="img-push">
+    <div class="input-group">
+      <input ng-change="vm.withoutMessage = false" type="text" class="form-control input-sm" placeholder="Press enter to post comment" ng-model="vm.message">
+
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-primary btn-sm">Send</button>
+      </span>
+    </div>
+
+    <p ng-show="vm.withoutMessage" class="text-red">Required message</p>
+  </div>
+</form>

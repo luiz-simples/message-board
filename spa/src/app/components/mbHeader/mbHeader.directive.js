@@ -9,7 +9,10 @@
   function mbHeader() {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/mbHeader/mbHeader.html'
+      templateUrl: 'app/components/mbHeader/mbHeader.html',
+      controller: 'mbHeaderController',
+      controllerAs: 'vm',
+      scope: {}
     };
   }
 })();

@@ -1,37 +1,21 @@
 'use strict';
 
-var path = require('path');
-var helmet = require('helmet');
-var express = require('express');
-var socketIO = require('socket.io');
-var compression = require('compression');
+var httpConf = require('./lib/httpConf');
+var socketConf = require('./lib/socketConf');
 var machineIPs = require('./lib/machine.ips');
-var publicPath = path.dirname(__dirname).concat('/public');
+var expressConf = require('./lib/expressConf');
 
 function MessageBoardServer(http, mbActions) {
   var server = this;
 
-  server.appExpress = express();
-  server.appExpress.use(helmet())
-  server.appExpress.use(compression());
-  server.appExpress.use('/', express.static(publicPath));
+  server.tokens = {};
+  server.emails = {};
+  server.worldAllMessages = require('./fixturesMessages');
 
+  expressConf(server, http);
   server.appHttp = http.Server(server.appExpress);
-  server.worldMessages = socketIO(server.appHttp).of('/world-messages');
-
-  server.worldMessages.on('connection', function(client) {
-    var allActions = mbActions.getActionsInstance(server);
-    console.log(client);
-    client.on('send:action:world', function (actProps) {
-      var actionName = actProps ? actProps.actionName : undefined;
-      var withoutAction = Boolean(!actionName || !allActions.hasOwnProperty(actionName) || !allActions[actionName]);
-      if (withoutAction) return client.emit('action not found', actProps);
-
-      var actionObj = allActions[actionName];
-
-      actionObj.run(actProps);
-    });
-  });
+  httpConf(server);
+  socketConf(server, mbActions);
 
   server.run = function(port, cb) {
     server.ips = machineIPs(port);

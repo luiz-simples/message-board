@@ -6,21 +6,19 @@
     .run(runBlock);
 
   /** @ngInject */
-  function runBlock($, $timeout, $location, socket, mbActions) {
-    $timeout(function() {
-      $.AdminLTE.layout.activate();
+  function runBlock($, $timeout, $localStorage, mbSocket, mbAuth) {
+    mbSocket.register();
+
+    mbAuth.onLogged(function(action) {
+      $localStorage.userAuth = action.auth;
     });
 
-    var protocol  = $location.protocol() + '://';
-    var hostname  = $location.host();
-    var servport  = $location.port();
-    var usesport  = servport === 80 ? '' : ':'.concat(servport >= 3000 && servport < 4000 ? 2018 : servport);
-    var address   = protocol + hostname + usesport;
-    console.log(address);
-    var sckServer = socket(address);
+    mbAuth.onLogout(function() {
+      delete $localStorage.userAuth;
+    });
 
-    mbActions.onAllActions(function(action) {
-      console.log(action);
+    $timeout(function() {
+      $.AdminLTE.layout.activate();
     });
   }
 })();

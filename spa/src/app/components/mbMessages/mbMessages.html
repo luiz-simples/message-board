@@ -1,0 +1,34 @@
+<div>
+  <div class="post">
+    <mb-send-world-message></mb-send-world-message>
+  </div>
+
+  <div class="post" ng-repeat="msg in vm.messages">
+    <div class="user-block">
+      <img class="img-circle img-bordered-sm" src="assets/images/user6-128x128.jpg" alt="User Image" />
+
+      <span class="username">
+        <a href="#">{{msg.user.name}}</a>
+        <a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+      </span>
+
+      <span class="description">{{msg.date}}</span>
+    </div>
+
+    <p>{{msg.message}}</p>
+
+    <ul class="list-inline">
+      <li>
+        <mb-likes message="msg"></mb-likes>
+      </li>
+
+      <li class="pull-right">
+        <a href="#" class="link-black text-sm">
+          <i class="fa fa-comments-o margin-r-5"></i> Comments ({{msg.comments.length}})
+        </a>
+      </li>
+    </ul>
+
+    <input class="form-control input-sm" type="text" placeholder="Type a comment">
+  </div>
+</div>

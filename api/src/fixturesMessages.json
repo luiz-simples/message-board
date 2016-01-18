@@ -1,0 +1,39 @@
+[
+  {
+    "id": 1,
+    "user": {
+      "name": "Adam Jones"
+    },
+
+    "dateTime": "2016-01-17 14:35",
+    "message": "Lorem ipsum represents a long-held tradition for designers, typographers and the like. Some people hate it and argue for its demise, but others ignore the hate as they create awesome tools to help create filler text for everyone from bacon lovers to Charlie Sheen fans.",
+    "comments": [],
+    "likes": []
+  },
+
+  {
+    "id": 2,
+
+    "user": {
+      "name": "Jonathan Burke Jr."
+    },
+
+    "dateTime": "2016-01-17 15:45",
+    "message": "Lorem ipsum represents a long-held tradition for designers, typographers and the like. Some people hate it and argue for its demise, but others ignore the hate as they create awesome tools to help create filler text for everyone from bacon lovers to Charlie Sheen fans.",
+    "comments": [],
+    "likes": []
+  },
+
+  {
+    "id": 3,
+
+    "user": {
+      "name": "Jonathan Burke Jr."
+    },
+
+    "dateTime": "2016-01-17 16:22",
+    "message": "Lorem ipsum represents a long-held tradition for designers, typographers and the like. Some people hate it and argue for its demise, but others ignore the hate as they create awesome tools to help create filler text for everyone from bacon lovers to Charlie Sheen fans.",
+    "comments": [],
+    "likes": []
+  }
+]

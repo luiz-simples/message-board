@@ -6,20 +6,17 @@
 
   <ol class="breadcrumb">
     <li>
-      <a href="#">
-        <i class="fa fa-dashboard"></i>
-        Home
+      <a ng-hide="vm.isLogged" href="javascript:void(0)" ng-click="vm.login()">
+        <i class="btn fa fa-user btn-success">
+          Loggin
+        </i>
       </a>
-    </li>
 
-    <li>
-      <a href="#">
-        Layout
+      <a ng-show="vm.isLogged" href="javascript:void(0)" ng-click="vm.logout()">
+        <i class="btn fa fa-user btn-info">
+          Logout
+        </i>
       </a>
-    </li>
-
-    <li class="active">
-      Top Navigation
     </li>
   </ol>
 </section>

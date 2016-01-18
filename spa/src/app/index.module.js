@@ -10,6 +10,7 @@
     'ngAria',
     'restangular',
     'ui.router',
-    'toastr'
+    'toastr',
+    'ngStorage'
   ]);
 })();

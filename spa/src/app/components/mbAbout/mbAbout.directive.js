@@ -9,7 +9,10 @@
   function mbAbout() {
     return {
       restrict: 'E',
-      templateUrl: 'app/components/mbAbout/mbAbout.html'
+      templateUrl: 'app/components/mbAbout/mbAbout.html',
+      controller: 'mbAboutController',
+      controllerAs: 'vm',
+      scope: {}
     };
   }
 })();

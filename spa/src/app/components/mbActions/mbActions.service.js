@@ -18,20 +18,17 @@
     };
 
     service.onAllActions = function(callback) {
-      return scopeActions.$on(service.messageBoardAction, callback);
+      return scopeActions.$on(service.messageBoardAction, function(e, data) {
+        callback(data);
+      });
     };
 
     service.onAction = function(actionName, callback) {
-      var watchAction = service.watchAction(actionName, callback);
-      return service.onAllActions(watchAction);
-    };
-
-    service.watchAction = function(actionName, cb) {
-      return function(e, obj) {
-        var withoutAction = Boolean(!obj || obj.actionName !== actionName);
+      return service.onAllActions(function(action) {
+        var withoutAction = Boolean(!action || action.actionName !== actionName);
         if (withoutAction) return;
-        cb(obj);
-      }
+        callback(action);
+      });
     };
   }
 })();
