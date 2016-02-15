@@ -6,7 +6,7 @@
     .service('mbMessages', MessagesService);
 
   /** @ngInject */
-  function MessagesService(mbActions) {
+  function MessagesService(mbActions, $localStorage, moment) {
     var service = this;
     var sendMessage = 'send:action:message:add';
     var receiveMessage = 'receive:action:message:add';
@@ -21,7 +21,9 @@
     service.sendMessage = function(message) {
       return mbActions.sendAction({
         actionName: sendMessage,
-        message: message
+        message: message,
+        user: $localStorage.userAuth,
+        date: moment().format('DD/MM/YYYY HH:mm')
       });
     };
 
