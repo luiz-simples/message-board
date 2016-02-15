@@ -1,6 +1,6 @@
 'use strict';
 
-var port = 2018;
+var port = 8080;
 var http = require('http');
 var log = require('log-util');
 var MessageBoardServer = require('./src/MessageBoardServer');

@@ -10,7 +10,7 @@
   var protocol = location.protocol + '//';
   var hostname = location.hostname;
   var servport = location.port;
-  var usesport = servport === 80 ? '' : ':'.concat(servport >= 3000 && servport < 4000 ? 2018 : servport);
+  var usesport = !servport || servport === 80 ? '' : ':'.concat(servport >= 3000 && servport < 4000 ? 8080 : servport);
   var hostServer = protocol + hostname + usesport;
 
   angular

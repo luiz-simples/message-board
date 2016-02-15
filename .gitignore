@@ -46,3 +46,4 @@ api/public/**/*.*
 
 spa/dist/**/*.*
 !spa/dist/.gitkeep
+api/Makefile
